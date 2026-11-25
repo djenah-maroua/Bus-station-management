@@ -31,8 +31,10 @@ void AddDeparture(list** H)
         D.number = ReadInt("Enter departure number: ");
 
         if (exist(*H, D.number) == true)
-            printf("This departure number already exists! Enter another one.\n");
-
+        {  
+         printf("This departure number already exists! Enter another one.\n");
+        }
+    
     } while (exist(*H, D.number) == true);
     
     ReadString("Enter destination: ", D.destination, sizeof(D.destination));
@@ -85,6 +87,7 @@ void AddDeparture(list** H)
 
 -----------------------------------------*/
 
+
 void ModifyDepartureTime(list* H)
 {
     list *P;
@@ -95,30 +98,42 @@ void ModifyDepartureTime(list* H)
         printf("\t The list is empty\n");
     }
     else {
-        Num = ReadInt("Enter departure number: ");
 
-        P = H;
-        while (P != NULL && P->value.number != Num) {
-            P = P->next;
-        }
+        do {
+            Num = ReadInt("Enter an existing departure number: ");
 
-        if (P == NULL) {
-            printf("Departure not found\n");
-        }
-        else {
-            do {
-                NewTime.hour = ReadInt("Enter new departure hour (0-23): ");
-            } while (NewTime.hour < 0 || NewTime.hour > 23);
+            P = H;
+            while (P != NULL && P->value.number != Num) {
+                P = P->next;
+            }
 
-            do {
-                NewTime.minute = ReadInt("Enter new departure minute (0-59): ");
-            } while (NewTime.minute < 0 || NewTime.minute > 59);
+            if (P == NULL) {
+                printf("Departure not found! Please enter an existing number.\n");
+            }
 
-            P->value.departureTime = NewTime;
-            printf("\n \t Departure time modified successfully\n");
-        }
+        } while (P == NULL);
+
+        // Display the old departure time
+        printf("\nOld departure time: %02d:%02d\n",
+               P->value.departureTime.hour,
+               P->value.departureTime.minute);
+
+        // Enter the new time
+        do {
+            NewTime.hour = ReadInt("Enter new departure hour (0-23): ");
+        } while (NewTime.hour < 0 || NewTime.hour > 23);
+
+        do {
+            NewTime.minute = ReadInt("Enter new departure minute (0-59): ");
+        } while (NewTime.minute < 0 || NewTime.minute > 59);
+
+        P->value.departureTime = NewTime;
+
+        printf("\n Old time successfully replaced by: %02d:%02d\n",
+               NewTime.hour, NewTime.minute);
     }
 }
+
 
 /*------------------------------
 
