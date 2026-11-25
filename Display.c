@@ -27,7 +27,7 @@ void searchdest(list *H){
 	
 	char dest[50];
 	printf("\n Give me the destination \n");
-	scanf("%s",&dest);
+	ReadString("",dest,sizeof(dest));
 	
 	
 		//search part    
