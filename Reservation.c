@@ -3,7 +3,6 @@
 #include <stdbool.h>
 #include <string.h>
 #include "datastructure.h"
- 
 float GetDiscount(int category)
 {
     if (category == 2)
