@@ -15,7 +15,7 @@ int ReadInt(const char message[]) {
 void ReadString(const char message[], char str[], int size) {
     printf("%s", message);
     fgets(str, size, stdin);
-    str[strcspn(str, "\n")] = '\n';
+    str[strcspn(str, "\n")] = '\0';
 }
 /*---------------------------------------
 

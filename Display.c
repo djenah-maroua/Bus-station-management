@@ -26,19 +26,54 @@ void WriteDeparture(list *P)
 void searchdest(list *H){
 	
 	char dest[50];
-	printf("\n Give me the destination \n");
-	ReadString("",dest,sizeof(dest));
+	printf("Give me the destination ");
+	getchar();
+	fgets(dest, sizeof(dest), stdin);
+	dest[strcspn(dest, "\n")]='\0';
 	
-	
-		//search part    
+		//search part
+		int i;  
+		int j;  
+	char temp[50];
+	char temp1[50];
 	
 	bool exist=false;
 	list* P=H;
+	//delete spaces of destination read
+	i=0;j=0;
+		while(i<strlen(dest)){
+			if(dest[i] !=' '){
+				temp[j]=dest[i];
+				j++;
+			}
+			i++;
+		}
+		
+		strcpy(dest,temp);
+		dest[j]='\0';
+		strcpy(temp,"");
+		
 		while(P!=NULL){
-		   if(strcasecmp((((*P).value).destination), dest)==0){
-		    WriteDeparture(P);
+			
+		//to develop compraison between strings we will delete space of both of them 
+		i=0;j=0;
+		strcpy(temp,(*P).value.destination);
+		
+		while(i<strlen(temp)){
+			if(temp[i]!=' '){
+				temp1[j]=temp[i];
+				j++;
+			}
+			i++;
+		}
+		temp1[j]='\0';
+		if(strcasecmp(temp1,dest)==0){
+			WriteDeparture(P);
         exist=true;
-		   }
+     	}
+     	//empty helper strings
+     	strcpy(temp1,"");
+     	
 		    P=(*P).next;
 	     }
 	     
