@@ -152,11 +152,14 @@ void delet(list **H)
         return;
     }
 
-    printf("Number of the departure to delete: ");
-    scanf("%d", &number);
+    
+    number=ReadInt("Number of the departure to delete: ");
 
     /* look for the departure */
-    while (cur != NULL && cur->value.number != number) {
+    
+	
+	
+	while (cur != NULL && cur->value.number != number) {
         prev = cur;
         cur = cur->next;
     }
